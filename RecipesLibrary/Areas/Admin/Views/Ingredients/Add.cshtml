@@ -1,0 +1,10 @@
+﻿@model string
+
+<h1>Add Ingredient</h1>
+<form method="post" asp-area="Admin" asp-controller="Ingredients" asp-action="Add">
+    <div class="form-group">
+        <label>Ingredient</label>
+        <input type="text" name="ingredient"/>
+    </div>
+    <button type="submit" class="btn btn-primary">Add</button>
+</form>

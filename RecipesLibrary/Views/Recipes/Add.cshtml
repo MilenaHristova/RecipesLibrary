@@ -1,0 +1,138 @@
+﻿@model RecipeAddModel
+
+@if (this.TempData.ContainsKey("error"))
+{
+    <br/>
+    <div class="text-danger">
+        <ul>
+            @foreach (var error in (string[])this.TempData["error"])
+            {
+                <li>@error</li>
+            }
+        </ul>
+    </div>
+}
+
+
+<h1>Add Recipe</h1>
+<form method="post" enctype="multipart/form-data"> 
+    <div class="form-row">
+        <div class="form-group col-md-12">
+            <label asp-for="Name">Title</label>
+            <input asp-for="Name" class="form-control" placeholder="Title">
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-12">
+            <label asp-for="Image">Image</label>
+            <input asp-for="Image" type="file" class="form-control" placeholder="Title">
+            <span asp-validation-for="Image" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-12">
+            <label asp-for="Description">Description</label>
+            <input asp-for="Description" class="form-control"placeholder="Description">
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-12">
+            <label asp-for="Course">Course</label>
+            <select asp-for="Course" asp-items="Model.Courses" class="form-control"></select>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-12">
+            <label asp-for="Servings">Servings</label>
+            <input asp-for="Servings" class="form-control" placeholder="Servings">
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-12">
+            <label asp-for="Category">Category</label>
+            <select asp-for="Category" asp-items="Model.Categories" class="form-control"></select>
+        </div>
+    </div>
+    <br />
+    <div class="form-row">
+        <div class="form-group col-md-12">
+            <label asp-for="Preparation">Preparation</label>
+            <textarea asp-for="Preparation" class="form-control" placeholder="Preparation Instructions"></textarea>
+            <span asp-validation-for="Preparation" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label asp-for="PrepTime">Preparation Time(in minutes)</label>
+            <input asp-for="PrepTime" class="form-control" />
+        </div>
+        <div class="form-group col-md-6">
+            <label asp-for="CookingTime">Cooking Time(in minutes)</label>
+            <input asp-for="CookingTime" class="form-control" />
+        </div>
+    </div>
+    <div>
+        <div class="ingrContainer">
+            <h1>Ingredients</h1>
+            <span asp-validation-for="Ingredients" class="text-danger"></span>
+            <div class="form-row">
+                <div class="col-md-4">
+                    <input name="Ingredients[0].Name" class="form-control" placeholder="Name" />
+                </div>
+                <div class="col-md-4">
+                    <input name="Ingredients[0].Measurement" class="form-control" placeholder="Measurement"/>
+                </div>
+                <div class="col-md-4">
+                    <input name="Ingredients[0].Quantity" class="form-control" placeholder="Quantity" />
+                </div>
+            </div>
+            <br />
+            <br />
+        </div>
+        <br />
+        <button class="addIngredient btn btn-warning button-add-ingredient">Add Ingredient</button>
+        <br />
+        <br />
+    </div>
+    
+   
+
+    <div class="text-center">
+        <button type="submit" class="btn btn-primary btn-lg">Add Recipe</button>
+    </div>
+</form>
+
+@section Scripts{ 
+<script>
+      $(document).ready(function () {
+            var index = 1;
+
+            $(".addIngredient").on("click", function (ev) {
+                ev.preventDefault();
+
+                var str = "<div class=\"form-row\">" +
+                    "<div class=\"col-md-4\">" +
+                    "<input name=\"Ingredients[" + index + "].Name\" class=\"form-control col-md-3\" placeholder=\"Name\" />" +
+                    "</div >" +
+                    "<div class=\"col-md-4\">" +
+                    "<input name=\"Ingredients[" + index + "].Measurement\" class=\"form-control col-md-3\" placeholder=\"Measurement\" />" +
+                    "</div >" +
+                    "<div class=\"col-md-4\">" +
+                    "<input name=\"Ingredients[" + index + "].Quantity\" class=\"form-control col-md-3\" placeholder=\"Quantity\" />" +
+                    "</div >" +
+                    "</div>" +
+                    "<br />" +
+                    "<br />";
+
+                $("div.ingrContainer").append(str);
+                index++;
+
+            })
+        })
+</script>
+}
+
+
+
+

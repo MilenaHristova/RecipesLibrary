@@ -1,0 +1,25 @@
+﻿@model PaginatedList<RecipeViewModel>
+
+@{
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+
+<div>
+    <div class="row">
+        @Html.DisplayForModel()
+    </div>
+    <div class="row">
+        <a asp-action="All" asp-controller="Recipes"
+           asp-route-page="@(Model.PageIndex - 1)"
+           class="btn btn-default @prevDisabled">
+            Previous
+        </a>
+        <a asp-action="All" asp-controller="Recipes"
+           asp-route-page="@(Model.PageIndex + 1)"
+           class="btn btn-default @nextDisabled">
+            Next
+        </a>
+    </div>
+</div>
+

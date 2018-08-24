@@ -1,0 +1,26 @@
+﻿@model UserWithRecipesModel
+
+<br/>
+<div class="row">
+    <div class="col-md-3">
+        <ul class="nav nav-pills nav-stacked">
+            <li class="nav-item"><a asp-action="Index">Recipes</a></li>
+            <li class="nav-item"><a asp-action="Index" asp-controller="Manage">Manage Profile</a></li>
+        </ul>
+    </div>
+    <div class="col-md-9">
+        <h1>User Profile</h1>
+        <h5>Username: @Model.Username</h5>
+        <h5>Email: @Model.Email</h5>
+        <h2>Recipes:</h2>
+        <ul>
+            @foreach (var recipe in Model.Recipes)
+            {
+                <li><a href="/Recipes/Details/@recipe.Id">@recipe.Name</a></li>
+            }
+        </ul>
+        
+    </div>
+
+</div>
+

@@ -1,0 +1,15 @@
+﻿@model List<UserModel>
+
+<h1>All Users</h1>
+<table>
+    @foreach (var user in Model)
+    {
+        <tr>
+            <td class="col-md-2">@user.Username</td>
+            <td><a href="/Admin/Users/Roles/@user.Id" class="btn btn-primary">Roles</a></td>
+            <td><a href="/Admin/Users/AddToRole/@user.Id" class="btn btn-info">Add To Role</a></td>
+            <td><a href="/Admin/Users/Delete/@user.Id" class="btn btn-danger">Delete</a></td>
+        </tr>
+    }
+</table>
+<a href="/Admin/Users/Add" class="btn btn-primary">Add New User</a>

@@ -1,0 +1,17 @@
+﻿@model RecipeViewModel
+
+<div class="card">
+    <div>
+        <img src="~/uploads/@Model.ImageUrl" alt="Recipe Image" height="200">
+    </div>
+    <div class="text-center">
+        <div>
+            <h2 class="text-capitalize">@Model.Name</h2>
+            <a href="/Recipes/Details/@Model.Id" class="btn btn-default">Details &rarr;</a>
+        </div>
+        <div class="text-muted details">
+            <p>Posted on @Model.AddedOn</p>
+            <p> by @Model.Author</p>
+        </div>
+    </div>
+</div>

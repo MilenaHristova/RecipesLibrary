@@ -1,0 +1,16 @@
+﻿@model RecipeWithIngredients
+
+<div class="card">
+    <div>
+        <img src="~/uploads/@Model.ImageUrl" alt="Recipe Image" height="200">
+    </div>
+    <div>
+        <h2 class="text-capitalize">@Model.Name</h2>
+    </div>
+    <div>
+        @string.Join(", ", Model.Ingredients)
+    </div>
+    <div>
+        <a href="/Recipes/Details/@Model.Id" class="btn btn-primary">Details &rarr;</a>
+    </div>
+</div>

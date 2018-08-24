@@ -1,0 +1,14 @@
+﻿@model List<IngredientModel>
+
+<h1>All Ingredients</h1>
+<table>
+    @foreach (var ingr in Model)
+    {
+        <tr>
+            <td>@ingr.Name</td>
+            <td><a href="/Admin/Ingredients/Edit/@ingr.Id" class="btn btn-warning">Delete</a></td>
+            <td><a href="/Admin/Ingredients/Delete/@ingr.Id" class="btn btn-danger">Delete</a></td>
+        </tr>
+    }
+</table>
+<a href="/Admin/Ingredients/Add" class="btn btn-primary">New Ingredient</a>

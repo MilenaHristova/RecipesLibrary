@@ -1,0 +1,123 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+.recipes{
+    text-align:center;
+    margin-top:50px;
+}
+
+.recipe{
+    margin:20px;
+    padding:10px;
+}
+
+/* Wrapping element */
+/* Set some basic padding to keep content from hitting the edges */
+.body-content {
+    padding-top: 2%;
+    width: 90%;
+}
+
+.result-body-content{
+    width: 100%;
+    padding-left: 5%;
+}
+/* Carousel */
+.carousel-caption p {
+    font-size: 20px;
+    line-height: 1.4;
+}
+
+/* Make .svg files in the carousel display properly in older browsers */
+.carousel-inner .item img[src$=".svg"] {
+    width: 100%;
+}
+
+/* QR code generator */
+#qrCode {
+    margin: 15px;
+}
+
+/* Hide/rearrange for smaller screens */
+@media screen and (max-width: 767px) {
+    /* Hide captions */
+    .carousel-caption {
+        display: none;
+    }
+}
+
+.card {
+    float: left;
+    width: 32%;
+    margin-bottom: 2rem;
+    border: 0;
+    margin: 5px;
+    padding: 10px;
+}
+
+.card img{
+    width: 90%;
+}
+
+.details {
+    font-size: 85%;
+}
+
+.recipeImage{
+    width: 300px;
+    height: 200px;
+}
+
+main{
+    margin-left: 5px;
+}
+
+.catLinks a{
+    color:brown;
+    font-size:medium;
+    font-weight:bold;
+}
+
+.catLinks a:hover{
+    color:burlywood;
+    text-decoration: none;
+}
+
+.title{
+    color:brown;
+}
+
+.description{
+    font-style:italic;
+    font-size: large;
+}
+
+.detailsImage{
+    width: 500px;
+    height: 300px;
+}
+
+.text-details{
+    font-size:large;
+}
+
+.text-details-small{
+    font-size: medium;
+    font-style:italic;
+}
+
+.button-add-ingredient{
+    margin-left: 15px;
+}
+
+.form-inline{
+    vertical-align:bottom;
+}
+
+.search-box{
+    font-size:14px;
+    height:24px;
+    margin-top:10px;
+}

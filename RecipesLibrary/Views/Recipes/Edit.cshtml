@@ -1,0 +1,51 @@
+﻿@model RecipeEditModel
+
+@Html.EditorForModel()
+
+@section Scripts{
+    <script>
+      $(document).ready(function () {
+          var index = 0;
+
+          $(".addIngredient").on("click", function (ev) {
+              ev.preventDefault();
+
+              var str = "<div class=\"form-row row\">" +
+                  "<div class=\"col-md-4\">" +
+                  "<input name=\"AddedIngredients[" + index + "].Name\" class=\"form-control col-md-3\" placeholder=\"Name\" />" +
+                  "</div >" +
+                  "<div class=\"col-md-2\">" +
+                  "<input name=\"AddedIngredients[" + index + "].Measurement\" class=\"form-control col-md-3\" placeholder=\"Measurement\" />" +
+                  "</div >" +
+                  "<div class=\"col-md-2\">" +
+                  "<input name=\"AddedIngredients[" + index + "].Quantity\" class=\"form-control col-md-3\" placeholder=\"Quantity\" />" +
+                  "</div >" +
+                  "<div class=\"col-md-2\">" +
+                      "<a href=\"#\" class=\"btn btn-warning remove\">X</a>" +
+                  "</div>" +
+                  "</div>" +
+                  "<br />" +
+                  "<br />";
+
+              $("div.ingrContainer").append(str);
+              index++;
+
+              $(".remove").on("click", function (ev) {
+                  ev.preventDefault();
+                  var row = $(this).parents(".row")[0];
+
+                  $(row).remove();
+              })
+          });
+
+          $(".delete").on("click", function (ev) {
+              ev.preventDefault();
+              var row = $(this).parents(".row")[0];
+              $(row).find(".deleted").val('true');
+
+              $(row).hide();
+          })
+
+        })
+    </script>
+}

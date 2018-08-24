@@ -1,0 +1,77 @@
+﻿@model RecipeSearchModel
+@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery antiforgeryService
+
+
+<form id="form">
+    <h1>Search recipes by ingredients</h1>
+    <div class="ingrContainer">
+        <div class="form-row">
+            <div class="col-md-4">
+                <input name="Ingredients[0]" class="form-control" placeholder="Ingredient" />
+            </div>
+        </div>
+        <br />
+        <br />
+    </div>
+    <div class="button-add-ingredient">
+        <button id="addIngredient" class="addIngredient btn btn-warning">Next Ingredient</button>
+    </div>
+    <div class="text-center">
+        <button type="submit" class="btn btn-primary btn-lg submit">Search</button>
+    </div>
+    <br />
+    <div class="results">
+
+    </div>
+</form>
+
+
+@section Scripts{
+    <script>
+      $(document).ready(function () {
+            var index = 1;
+
+            $(".addIngredient").on("click", function (ev) {
+                ev.preventDefault();
+
+                var str = "<div class=\"form-row\">" +
+                    "<div class=\"col-md-4\">" +
+                    "<input name=\"Ingredients[" + index + "]\" class=\"form-control col-md-3\" placeholder=\"Ingredient\" />" +
+                    "</div >" +
+                    "</div>" +
+                    "<br />" +
+                    "<br />";
+
+                $("div.ingrContainer").append(str);
+                index++;
+            });
+
+            $("form").submit(function (ev) {
+                var remainingEntry = 3;
+
+                ev.preventDefault();
+
+                $.ajax({
+                    url: '@Url.Action("SearchByIngredients", "Recipes")',
+                    type: 'POST',
+                    contentType: 'application/x-www-form-urlencoded; charset=utf-8',
+                    data: $("form").serialize(),
+                    headers: {
+                        "Access-Control-Request-Methods": 'POST',
+                        "Access-Control-Allow-Origin": '*',
+                        "RequestVerificationToken": "@(antiforgeryService.GetAndStoreTokens(Context).RequestToken)"
+                    },
+                    dataType: "html",
+                    success: function displayResult(res) {
+                        console.log(res);
+                        $(".results").html(res);
+                    },
+                    error: function (response, ajaxOptions, thrownError) {
+                        console.log(response);
+                    }
+                });
+            });
+        })
+    </script>
+}
+

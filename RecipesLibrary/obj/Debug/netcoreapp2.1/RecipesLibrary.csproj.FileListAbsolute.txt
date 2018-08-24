@@ -1,0 +1,17 @@
+D:\RecipesLibrary\RecipesLibrary\obj\Debug\netcoreapp2.1\RecipesLibrary.csprojResolveAssemblyReference.cache
+D:\RecipesLibrary\RecipesLibrary\obj\Debug\netcoreapp2.1\RecipesLibrary.csproj.CoreCompileInputs.cache
+D:\RecipesLibrary\RecipesLibrary\obj\Debug\netcoreapp2.1\RecipesLibrary.AssemblyInfoInputs.cache
+D:\RecipesLibrary\RecipesLibrary\obj\Debug\netcoreapp2.1\RecipesLibrary.AssemblyInfo.cs
+D:\RecipesLibrary\RecipesLibrary\bin\Debug\netcoreapp2.1\RecipesLibrary.deps.json
+D:\RecipesLibrary\RecipesLibrary\bin\Debug\netcoreapp2.1\RecipesLibrary.runtimeconfig.json
+D:\RecipesLibrary\RecipesLibrary\bin\Debug\netcoreapp2.1\RecipesLibrary.runtimeconfig.dev.json
+D:\RecipesLibrary\RecipesLibrary\bin\Debug\netcoreapp2.1\RecipesLibrary.dll
+D:\RecipesLibrary\RecipesLibrary\bin\Debug\netcoreapp2.1\RecipesLibrary.pdb
+D:\RecipesLibrary\RecipesLibrary\bin\Debug\netcoreapp2.1\RecipesLibrary.Data.dll
+D:\RecipesLibrary\RecipesLibrary\bin\Debug\netcoreapp2.1\RecipesLibrary.Models.dll
+D:\RecipesLibrary\RecipesLibrary\bin\Debug\netcoreapp2.1\RecipesLibrary.Services.dll
+D:\RecipesLibrary\RecipesLibrary\bin\Debug\netcoreapp2.1\RecipesLibrary.Services.pdb
+D:\RecipesLibrary\RecipesLibrary\bin\Debug\netcoreapp2.1\RecipesLibrary.Data.pdb
+D:\RecipesLibrary\RecipesLibrary\bin\Debug\netcoreapp2.1\RecipesLibrary.Models.pdb
+D:\RecipesLibrary\RecipesLibrary\obj\Debug\netcoreapp2.1\RecipesLibrary.dll
+D:\RecipesLibrary\RecipesLibrary\obj\Debug\netcoreapp2.1\RecipesLibrary.pdb

@@ -1,0 +1,43 @@
+﻿
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Recipes
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a asp-area="" asp-controller="Recipes" asp-action="All" class="dropdown-item">List All</a></li>
+            <li><a asp-area="" asp-controller="Recipes" asp-action="SearchByIngredients" class="dropdown-item">SearchByIngredients</a></li>
+            <li><a asp-area="" asp-controller="Recipes" asp-action="Add">Upload</a></li>
+        </ul>
+    </li>
+    <li class="nav-item">
+        <a asp-area="Admin" asp-controller="Users" asp-action="All" class="dropdown-item">Users</a>
+    </li>
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Ingredients
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a asp-area="Admin" asp-controller="Ingredients" asp-action="All" class="dropdown-item">List Ingredients</a></li>
+            <li><a asp-area="Admin" asp-controller="Ingredients" asp-action="Add" class="dropdown-item">Add Ingredient</a></li>
+            <li><a asp-area="Admin" asp-controller="Measurements" asp-action="Add" class="dropdown-item">Add Measurement</a></li>
+        </ul>
+    </li>
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+             Courses
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a asp-area="Admin" asp-controller="Courses" asp-action="Add" class="dropdown-item">Add Course</a></li>
+            <li><a asp-area="Admin" asp-controller="Courses" asp-action="All" class="dropdown-item">List Courses</a></li>
+        </ul>
+    </li>
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Categories
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a asp-area="Admin" asp-controller="Categories" asp-action="Add" class="dropdown-item">Add Category</a></li>
+            <li><a asp-area="Admin" asp-controller="Categories" asp-action="All" class="dropdown-item">List Categories</a></li>
+        </ul>
+    </li>
+
