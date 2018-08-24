@@ -21,10 +21,9 @@
                   "<input name=\"AddedIngredients[" + index + "].Quantity\" class=\"form-control col-md-3\" placeholder=\"Quantity\" />" +
                   "</div >" +
                   "<div class=\"col-md-2\">" +
-                      "<a href=\"#\" class=\"btn btn-warning remove\">X</a>" +
+                  "<a href=\"#\" class=\"btn btn-warning remove\">X</a>" +
                   "</div>" +
                   "</div>" +
-                  "<br />" +
                   "<br />";
 
               $("div.ingrContainer").append(str);
@@ -33,7 +32,6 @@
               $(".remove").on("click", function (ev) {
                   ev.preventDefault();
                   var row = $(this).parents(".row")[0];
-
                   $(row).remove();
               })
           });

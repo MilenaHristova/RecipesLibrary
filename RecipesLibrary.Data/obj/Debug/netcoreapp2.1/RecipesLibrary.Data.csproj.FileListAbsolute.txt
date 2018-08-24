@@ -11,3 +11,16 @@ D:\RecipesLibrary\RecipesLibrary.Data\bin\Debug\netcoreapp2.1\RecipesLibrary.Mod
 D:\RecipesLibrary\RecipesLibrary.Data\bin\Debug\netcoreapp2.1\RecipesLibrary.Models.pdb
 D:\RecipesLibrary\RecipesLibrary.Data\obj\Debug\netcoreapp2.1\RecipesLibrary.Data.dll
 D:\RecipesLibrary\RecipesLibrary.Data\obj\Debug\netcoreapp2.1\RecipesLibrary.Data.pdb
+D:\programming\RecipesLibrary\RecipesLibrary.Data\bin\Debug\netcoreapp2.1\RecipesLibrary.Data.deps.json
+D:\programming\RecipesLibrary\RecipesLibrary.Data\bin\Debug\netcoreapp2.1\RecipesLibrary.Data.runtimeconfig.json
+D:\programming\RecipesLibrary\RecipesLibrary.Data\bin\Debug\netcoreapp2.1\RecipesLibrary.Data.runtimeconfig.dev.json
+D:\programming\RecipesLibrary\RecipesLibrary.Data\bin\Debug\netcoreapp2.1\RecipesLibrary.Data.dll
+D:\programming\RecipesLibrary\RecipesLibrary.Data\bin\Debug\netcoreapp2.1\RecipesLibrary.Data.pdb
+D:\programming\RecipesLibrary\RecipesLibrary.Data\bin\Debug\netcoreapp2.1\RecipesLibrary.Models.dll
+D:\programming\RecipesLibrary\RecipesLibrary.Data\bin\Debug\netcoreapp2.1\RecipesLibrary.Models.pdb
+D:\programming\RecipesLibrary\RecipesLibrary.Data\obj\Debug\netcoreapp2.1\RecipesLibrary.Data.csprojResolveAssemblyReference.cache
+D:\programming\RecipesLibrary\RecipesLibrary.Data\obj\Debug\netcoreapp2.1\RecipesLibrary.Data.csproj.CoreCompileInputs.cache
+D:\programming\RecipesLibrary\RecipesLibrary.Data\obj\Debug\netcoreapp2.1\RecipesLibrary.Data.AssemblyInfoInputs.cache
+D:\programming\RecipesLibrary\RecipesLibrary.Data\obj\Debug\netcoreapp2.1\RecipesLibrary.Data.AssemblyInfo.cs
+D:\programming\RecipesLibrary\RecipesLibrary.Data\obj\Debug\netcoreapp2.1\RecipesLibrary.Data.dll
+D:\programming\RecipesLibrary\RecipesLibrary.Data\obj\Debug\netcoreapp2.1\RecipesLibrary.Data.pdb

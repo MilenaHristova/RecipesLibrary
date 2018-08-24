@@ -37,5 +37,22 @@ namespace RecipesLibrary.Services
 
             return res;
         }
+
+        public Dictionary<int, string> AllWithIds()
+        {
+            var res = this.dbContext
+                .Courses
+                .ToDictionary(c => c.Id, c => c.Name);
+
+            return res;
+        }
+
+        public void Delete(int id)
+        {
+            var c = this.dbContext.Courses.Find(id);
+
+            this.dbContext.Remove(c);
+            this.dbContext.SaveChanges();
+        }
     }
 }

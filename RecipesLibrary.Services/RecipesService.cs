@@ -249,8 +249,9 @@
             this.dbContext
                 .Recipes
                 .Remove(r);
-        }
 
+            this.dbContext.SaveChanges();
+        }
 
         public void Edit(RecipeEditModel model)
         {
@@ -278,23 +279,38 @@
 
             var ingredients = new List<RecipeIngredient>();
 
-            foreach (var ingr in model.Ingredients)
+            if(model.Ingredients != null)
+            {
+                foreach (var ingr in model.Ingredients)
+                {
+                    if (!ingr.IsDeleted)
+                    {
+                        this.AddIngredient(ingr, ingredients, recipe);
+                    }
+                    else
+                    {
+                        var removed = dbContext
+                            .RecipesIngredients
+                            .FirstOrDefault(r => r.Ingredient.Name == ingr.Name &&
+                            r.RecipeId == model.Id);
+
+                        this.dbContext.RecipesIngredients.Remove(removed);
+                        this.dbContext.SaveChanges();
+                    }
+                }
+            }
+            
+            foreach(var ingr in model.AddedIngredients)
             {
                 if (!ingr.IsDeleted)
                 {
-                    this.AddIngredient(ingr, ingredients);
+                    this.AddIngredient(ingr, ingredients, recipe);
                 }
-            }
-
-            foreach(var ingr in model.AddedIngredients)
-            {
-                this.AddIngredient(ingr, ingredients);
             }
 
             recipe.Ingredients = ingredients;
 
             this.dbContext.Attach(recipe);
-            //user.Recipes.Add(recipe);
             this.dbContext.SaveChanges();
         }
 
@@ -377,8 +393,24 @@
             return res;
         }
 
-        private void AddIngredient(IngredientEditModel ingr, List<RecipeIngredient> ingredients)
+        private void AddIngredient(IngredientEditModel ingr,
+            List<RecipeIngredient> ingredients,
+            Recipe recipe)
         {
+            if(!this.dbContext
+                .Measurements
+                .Any(m => m.Name == ingr.Measurement))
+            {
+                this.dbContext
+                    .Measurements
+                    .Add(new Measurement
+                    {
+                        Name = ingr.Measurement
+                    });
+
+                this.dbContext.SaveChanges();
+            }
+
             var measurement = this.dbContext
                     .Measurements
                     .FirstOrDefault(m => m.Name == ingr.Measurement);
@@ -403,7 +435,8 @@
             {
                 Measurement = measurement,
                 Quantity = quantity,
-                IngredientId = ingredient.Id
+                Ingredient = ingredient,
+                Recipe = recipe
             });
         
         }

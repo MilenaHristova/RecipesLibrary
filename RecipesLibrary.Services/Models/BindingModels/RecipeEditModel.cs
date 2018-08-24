@@ -8,6 +8,11 @@ namespace RecipesLibrary.Services.Models
 {
     public class RecipeEditModel
     {
+        public RecipeEditModel()
+        {
+            this.AddedIngredients = new List<IngredientEditModel>();
+        }
+
         public int Id { get; set; }
 
         public string Name { get; set; }

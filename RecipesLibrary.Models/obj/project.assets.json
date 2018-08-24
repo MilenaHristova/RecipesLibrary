@@ -13579,11 +13579,11 @@
       "hideWarningsAndErrors": true
     },
     "restore": {
-      "projectUniqueName": "D:\\RecipesLibrary\\RecipesLibrary.Models\\RecipesLibrary.Models.csproj",
+      "projectUniqueName": "D:\\programming\\RecipesLibrary\\RecipesLibrary.Models\\RecipesLibrary.Models.csproj",
       "projectName": "RecipesLibrary.Models",
-      "projectPath": "D:\\RecipesLibrary\\RecipesLibrary.Models\\RecipesLibrary.Models.csproj",
+      "projectPath": "D:\\programming\\RecipesLibrary\\RecipesLibrary.Models\\RecipesLibrary.Models.csproj",
       "packagesPath": "C:\\Users\\Vesko\\.nuget\\packages\\",
-      "outputPath": "D:\\RecipesLibrary\\RecipesLibrary.Models\\obj\\",
+      "outputPath": "D:\\programming\\RecipesLibrary\\RecipesLibrary.Models\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

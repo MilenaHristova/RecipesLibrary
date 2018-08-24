@@ -9,3 +9,14 @@ D:\RecipesLibrary\RecipesLibrary.Models\bin\Debug\netcoreapp2.1\RecipesLibrary.M
 D:\RecipesLibrary\RecipesLibrary.Models\bin\Debug\netcoreapp2.1\RecipesLibrary.Models.pdb
 D:\RecipesLibrary\RecipesLibrary.Models\obj\Debug\netcoreapp2.1\RecipesLibrary.Models.dll
 D:\RecipesLibrary\RecipesLibrary.Models\obj\Debug\netcoreapp2.1\RecipesLibrary.Models.pdb
+D:\programming\RecipesLibrary\RecipesLibrary.Models\bin\Debug\netcoreapp2.1\RecipesLibrary.Models.deps.json
+D:\programming\RecipesLibrary\RecipesLibrary.Models\bin\Debug\netcoreapp2.1\RecipesLibrary.Models.runtimeconfig.json
+D:\programming\RecipesLibrary\RecipesLibrary.Models\bin\Debug\netcoreapp2.1\RecipesLibrary.Models.runtimeconfig.dev.json
+D:\programming\RecipesLibrary\RecipesLibrary.Models\bin\Debug\netcoreapp2.1\RecipesLibrary.Models.dll
+D:\programming\RecipesLibrary\RecipesLibrary.Models\bin\Debug\netcoreapp2.1\RecipesLibrary.Models.pdb
+D:\programming\RecipesLibrary\RecipesLibrary.Models\obj\Debug\netcoreapp2.1\RecipesLibrary.Models.csprojResolveAssemblyReference.cache
+D:\programming\RecipesLibrary\RecipesLibrary.Models\obj\Debug\netcoreapp2.1\RecipesLibrary.Models.csproj.CoreCompileInputs.cache
+D:\programming\RecipesLibrary\RecipesLibrary.Models\obj\Debug\netcoreapp2.1\RecipesLibrary.Models.AssemblyInfoInputs.cache
+D:\programming\RecipesLibrary\RecipesLibrary.Models\obj\Debug\netcoreapp2.1\RecipesLibrary.Models.AssemblyInfo.cs
+D:\programming\RecipesLibrary\RecipesLibrary.Models\obj\Debug\netcoreapp2.1\RecipesLibrary.Models.dll
+D:\programming\RecipesLibrary\RecipesLibrary.Models\obj\Debug\netcoreapp2.1\RecipesLibrary.Models.pdb

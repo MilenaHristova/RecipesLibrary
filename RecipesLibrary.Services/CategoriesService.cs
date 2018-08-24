@@ -38,11 +38,29 @@ namespace RecipesLibrary.Services
             return res;
         }
 
+        public Dictionary<int, string> AllWithIds()
+        {
+            var res = this.dbContext
+                .Categories
+                .ToDictionary(c => c.Id, c => c.Name);
+
+            return res;
+        }
+
+        public void Delete(int id)
+        {
+            var cat = this.dbContext.Categories.Find(id);
+
+            this.dbContext.Remove(cat);
+            this.dbContext.SaveChanges();
+        }
+
         public bool ExistsByName(string name)
         {
             return this.dbContext
                 .Categories
                 .Any(c => c.Name == name);
         }
+
     }
 }

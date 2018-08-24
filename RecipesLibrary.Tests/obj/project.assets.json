@@ -15056,11 +15056,11 @@
       "hideWarningsAndErrors": true
     },
     "restore": {
-      "projectUniqueName": "D:\\RecipesLibrary\\RecipesLibrary.Tests\\RecipesLibrary.Tests.csproj",
+      "projectUniqueName": "D:\\programming\\RecipesLibrary\\RecipesLibrary.Tests\\RecipesLibrary.Tests.csproj",
       "projectName": "RecipesLibrary.Tests",
-      "projectPath": "D:\\RecipesLibrary\\RecipesLibrary.Tests\\RecipesLibrary.Tests.csproj",
+      "projectPath": "D:\\programming\\RecipesLibrary\\RecipesLibrary.Tests\\RecipesLibrary.Tests.csproj",
       "packagesPath": "C:\\Users\\Vesko\\.nuget\\packages\\",
-      "outputPath": "D:\\RecipesLibrary\\RecipesLibrary.Tests\\obj\\",
+      "outputPath": "D:\\programming\\RecipesLibrary\\RecipesLibrary.Tests\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -15079,8 +15079,8 @@
       "frameworks": {
         "netcoreapp2.1": {
           "projectReferences": {
-            "D:\\RecipesLibrary\\RecipesLibrary\\RecipesLibrary.csproj": {
-              "projectPath": "D:\\RecipesLibrary\\RecipesLibrary\\RecipesLibrary.csproj"
+            "D:\\programming\\RecipesLibrary\\RecipesLibrary\\RecipesLibrary.csproj": {
+              "projectPath": "D:\\programming\\RecipesLibrary\\RecipesLibrary\\RecipesLibrary.csproj"
             }
           }
         }

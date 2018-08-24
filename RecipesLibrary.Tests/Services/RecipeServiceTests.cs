@@ -348,7 +348,86 @@ namespace RecipesLibrary.Tests
         }
 
         [Fact]
+        public void DeleteShouldDeleteRecipe()
+        {
+            var db = this.GetDatabase();
 
+            var recipesService = new RecipesService(db);
+
+            db.Recipes
+                .Add(new Recipe
+                {
+                    Name = "test",
+                    Id = 1
+                });
+
+            recipesService.Delete(1);
+
+            var recipe = db.Recipes.Find(1);
+            recipe.Should().BeNull();
+        }
+
+        [Fact]
+        public async Task AddRecipeShouldAddIngredientsToRecipe()
+        {
+            var db = this.GetDatabase();
+
+            var recipesService = new RecipesService(db);
+
+            db.Courses
+                .Add(new Course
+                {
+                    Name = "testCourse"
+                });
+
+            db.Categories
+                .Add(new Category
+                {
+                    Name = "testCategory"
+                });
+
+            db.Ingredients
+                .Add(new Ingredient
+                {
+                    Name = "testIngredient"
+                });
+
+            db.Users
+                .Add(new User
+                {
+                    UserName = "test",
+                    Email = "test",
+                    PasswordHash = "test",
+                    Id = "testUserId"
+                });
+
+            db.SaveChanges();
+
+            var model = new RecipeAddModel
+            {
+                Name = "testRecipe",
+                Course = "testCourse",
+                Category = "testCategory",
+                Ingredients = new List<AddIngredient>
+                {
+                    new AddIngredient
+                    {
+                        Name = "testIngredient"
+                    }
+                }
+            };
+
+            await recipesService.AddRecipe(model, "test");
+
+            var recipe = db.Recipes
+                .FirstOrDefault(r => r.Name == "testRecipe");
+
+            var ingr = recipe
+                .Ingredients
+                .FirstOrDefault(i => i.Ingredient.Name == "testIngredient");
+
+            ingr.Should().NotBeNull();
+        }
 
         private RecipesDbContext GetDatabase()
         {

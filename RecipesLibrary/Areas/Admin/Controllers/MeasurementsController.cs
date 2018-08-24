@@ -29,5 +29,22 @@ namespace RecipesLibrary.Areas.Admin.Controllers
 
             return Redirect("/Home/Index");
         }
+
+        [HttpGet]
+        public IActionResult All()
+        {
+            var all = this.measurementsService
+                .AllWithIds();
+
+            return View(all);
+        }
+
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            this.measurementsService.Delete(id);
+
+            return RedirectToAction(nameof(All));
+        }
     }
 }

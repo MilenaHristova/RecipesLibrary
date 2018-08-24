@@ -8,6 +8,10 @@ namespace RecipesLibrary.Services.Contracts
     {
         List<string> All();
 
+        Dictionary<int, string> AllWithIds();
+
         void Add(string name);
+
+        void Delete(int id);
     }
 }

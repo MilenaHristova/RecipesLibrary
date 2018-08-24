@@ -1,0 +1,15 @@
+﻿@model Dictionary<int, string>
+
+<div class="row">
+    <table>
+        <tbody>
+        @foreach (var c in Model)
+        {
+            <tr>
+                <td width="500">@c.Value</td>
+                <td><a href="/Admin/Categories/Delete/@c.Key" class="btn btn-danger">Delete</a></td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>
