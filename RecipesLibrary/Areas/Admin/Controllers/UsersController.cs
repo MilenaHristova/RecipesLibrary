@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using RecipesLibrary.Areas.Admin.Models;
 using RecipesLibrary.Data;
 using RecipesLibrary.Infrastructure;
+using RecipesLibrary.Infrastructure.Extensions;
 using RecipesLibrary.Models;
 using RecipesLibrary.Services.Models.Admin;
 using System;
@@ -20,22 +21,18 @@ namespace RecipesLibrary.Areas.Admin.Controllers
     {
         private readonly UserManager<User> userManager;
         private readonly RoleManager<IdentityRole> rolesManager;
-        private readonly RecipesDbContext dbContext;
 
         public UsersController(UserManager<User> userManager
-            , RecipesDbContext dbContext
             , RoleManager<IdentityRole> rolesManager)
         {
             this.userManager = userManager;
-            this.dbContext = dbContext;
             this.rolesManager = rolesManager;
         }
 
         [HttpGet]
         public IActionResult All()
         {
-            var users = this.dbContext
-                .Users
+            var users = this.userManager.Users
                 .Select(u => new UserModel
                 {
                     Username = u.UserName,
@@ -62,7 +59,11 @@ namespace RecipesLibrary.Areas.Admin.Controllers
             };
 
             await this.userManager.CreateAsync(user, model.Password);
-            return Redirect("All");
+            await this.userManager.AddToRoleAsync(user, GlobalConstants.UserRole);
+
+            this.AddAlertSuccess("User Account created.");
+
+            return RedirectToAction(nameof(All));
         }
 
         [HttpGet]
@@ -83,8 +84,7 @@ namespace RecipesLibrary.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult AddToRole(string id)
         {
-            var rolesSelect = this.dbContext
-                .Roles
+            var roles = this.rolesManager.Roles
                 .Select(r => new SelectListItem
                 {
                     Text = r.Name,
@@ -92,17 +92,33 @@ namespace RecipesLibrary.Areas.Admin.Controllers
                 }).ToList();
 
             this.ViewData["id"] = id;
-            return View(rolesSelect);
+            return View(roles);
         }
 
         [HttpPost]
         public async Task<IActionResult> AddToRole(string id, string role)
         {
-            var user = this.dbContext.Users.Find(id);
+            var user = await this.userManager.FindByIdAsync(id);
 
             await this.userManager.AddToRoleAsync(user, role);
 
-            return Redirect("/Admin/Users/All");
+            this.AddAlertSuccess("User is added to role.");
+            return RedirectToAction(nameof(All));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(string id)
+        {
+            var user = await this.userManager.FindByIdAsync(id);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            await this.userManager.DeleteAsync(user);
+            this.AddAlertSuccess("User Account is deleted.");
+            return this.RedirectToAction(nameof(All));
         }
     }
 }

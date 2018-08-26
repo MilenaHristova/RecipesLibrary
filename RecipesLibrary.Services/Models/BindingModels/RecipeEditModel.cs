@@ -10,6 +10,8 @@ namespace RecipesLibrary.Services.Models
     {
         public RecipeEditModel()
         {
+            this.Courses = new List<SelectListItem>();
+            this.Categories = new List<SelectListItem>();
             this.AddedIngredients = new List<IngredientEditModel>();
         }
 
@@ -32,6 +34,8 @@ namespace RecipesLibrary.Services.Models
         public int CookingTime { get; set; }
 
         public string ImageUrl { get; set; }
+
+        public string Author { get; set; }
 
         public List<IngredientEditModel> Ingredients { get; set; }
 

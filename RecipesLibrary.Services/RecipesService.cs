@@ -1,5 +1,7 @@
 ﻿namespace RecipesLibrary.Services
 {
+    using AutoMapper;
+    using AutoMapper.QueryableExtensions;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc.Rendering;
@@ -26,18 +28,9 @@
         {
             var recipes = this.dbContext
                 .Recipes
-                .Select(r => new RecipeViewModel
-                {
-                    Name = r.Name,
-                    Description = r.Description,
-                    AddedOn = $"{r.AddedOn.Day}/{r.AddedOn.Month}/{r.AddedOn.Year}",
-                    Author = r.Author.UserName,
-                    Id = r.Id,
-                    ImageUrl = r.ImageUrl
-                })
+                .OrderByDescending(r => r.AddedOn)
+                .ProjectTo<RecipeViewModel>()
                 .ToList();
-
-            recipes = recipes.OrderByDescending(r => r.AddedOn).ToList();
 
             return recipes;
         }
@@ -46,16 +39,8 @@
         {
             var recipes = this.dbContext
                 .Recipes
-                .Select(r => new RecipeViewModel
-                {
-                    Name = r.Name,
-                    Description = r.Description,
-                    AddedOn = $"{r.AddedOn.Day}/{r.AddedOn.Month}/{r.AddedOn.Year}",
-                    Author = r.Author.UserName,
-                    Id = r.Id,
-                    ImageUrl = r.ImageUrl
-                })
                 .OrderByDescending(r => r.AddedOn)
+                .ProjectTo<RecipeViewModel>()
                 .Take(count)
                 .ToList();
 
@@ -66,14 +51,8 @@
         {
             var res = this.dbContext
                 .Recipes
-                .Select(r => new RecipeWithIngredients
-                {
-                    Name = r.Name,
-                    Id = r.Id,
-                    ImageUrl = r.ImageUrl,
-                    Ingredients = r.Ingredients
-                       .Select(i => i.Ingredient.Name).ToList()
-                }).ToList();
+                .ProjectTo<RecipeWithIngredients>()
+                .ToList();
 
             return res;
         }
@@ -192,14 +171,7 @@
             var res = this.dbContext
                 .Recipes
                 .Where(r => r.AuthorId == userId)
-                .Select(r => new RecipeViewModel
-                {
-                    Name = r.Name,
-                    Description = r.Description,
-                    Id = r.Id,
-                    AddedOn = $"{r.AddedOn.Day}/{r.AddedOn.Month}/{r.AddedOn.Year}",
-                    ImageUrl = r.ImageUrl
-                })
+                .ProjectTo<RecipeViewModel>()
                 .ToList();
 
             return res;
@@ -210,32 +182,8 @@
             var res = this.dbContext
                 .Recipes
                 .Where(r => r.Id == id)
-                .Select(recipe => new RecipeDetailsModel
-                {
-                    Name = recipe.Name,
-                    Author = recipe.Author.UserName,
-                    Description = recipe.Description,
-                    AddedOn = $"{recipe.AddedOn.Day}/{recipe.AddedOn.Month}/{recipe.AddedOn.Year}",
-                    ImageUrl = recipe.ImageUrl,
-                    Ingredients = recipe.Ingredients.Select(i => new IngredientModel
-                    {
-                        Name = i.Ingredient.Name,
-                        Quantity = i.Quantity,
-                        Measurement = i.Measurement.Name
-                    }).ToList(),
-                    Category = recipe.Category.Name,
-                    Course = recipe.Course.Name,
-                    Preparation = recipe.Preparation,
-                    PrepTime = recipe.PrepTime,
-                    CookingTime = recipe.CookingTime,
-                    Servings = recipe.Servings,
-                    Id = recipe.Id
-                }).FirstOrDefault();
-
-            if(res == null)
-            {
-                throw new ArgumentException("Recipe not found");
-            }
+                .ProjectTo<RecipeDetailsModel>()
+                .FirstOrDefault();
 
             return res;
         }
@@ -283,11 +231,15 @@
             {
                 foreach (var ingr in model.Ingredients)
                 {
-                    if (!ingr.IsDeleted)
+                    var isAlreadyAdded = this.dbContext.RecipesIngredients
+                        .Any(i => i.Ingredient.Name == ingr.Name && 
+                        i.Recipe.Id == recipe.Id);
+
+                    if (!ingr.IsDeleted && !isAlreadyAdded)
                     {
                         this.AddIngredient(ingr, ingredients, recipe);
                     }
-                    else
+                    else if(ingr.IsDeleted)
                     {
                         var removed = dbContext
                             .RecipesIngredients
@@ -308,9 +260,9 @@
                 }
             }
 
-            recipe.Ingredients = ingredients;
 
-            this.dbContext.Attach(recipe);
+            this.dbContext.RecipesIngredients.AddRange(ingredients);
+            //recipe.Ingredients = ingredients;
             this.dbContext.SaveChanges();
         }
 
@@ -343,33 +295,12 @@
             var res = this.dbContext
                 .Recipes
                 .Where(r => r.Id == id)
-                .Select(recipe => new RecipeEditModel
-                {
-                    Categories = allCategories,
-                    Courses = allCourses,
-                    Measurements = allMeasurements,
-                    Name = recipe.Name,
-                    Description = recipe.Description,
-                    ImageUrl = recipe.ImageUrl,
-                    Ingredients = recipe.Ingredients.Select(i => new IngredientEditModel
-                    {
-                        Name = i.Ingredient.Name,
-                        Quantity = i.Quantity,
-                        Measurement = i.Measurement.Name
-                    }).ToList(),
-                    Category = recipe.Category.Name,
-                    Course = recipe.Course.Name,
-                    Preparation = recipe.Preparation,
-                    PrepTime = recipe.PrepTime,
-                    CookingTime = recipe.CookingTime,
-                    Servings = recipe.Servings,
-                    Id = recipe.Id
-                }).FirstOrDefault();
+                .ProjectTo<RecipeEditModel>()
+                .FirstOrDefault();
 
-            if (res == null)
-            {
-                throw new ArgumentException("Recipe not found");
-            }
+            res.Categories = allCategories;
+            res.Courses = allCourses;
+            res.Measurements = allMeasurements;
 
             return res;
         }
@@ -379,18 +310,36 @@
             var res = this.dbContext
                 .Recipes
                 .Where(r => r.Category.Name == category)
-                .Select(r => new RecipeViewModel
-                {
-                    Name = r.Name,
-                    Description = r.Description,
-                    Id = r.Id,
-                    Author = r.Author.UserName,
-                    AddedOn = $"{r.AddedOn.Day}/{r.AddedOn.Month}/{r.AddedOn.Year}",
-                    ImageUrl = r.ImageUrl
-                })
+                .ProjectTo<RecipeViewModel>()
                 .ToList();
 
             return res;
+        }
+
+        public bool IsSavedByUser(string username, int recipeId)
+        {
+            var saved = this.dbContext
+                .UsersRecipes
+                .FirstOrDefault(u => u.RecipeId == recipeId
+                && u.User.UserName == username);
+
+            if(saved == null)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        public List<RecipeViewModel> Search(string searchTerm)
+        {
+            var recipes = this.dbContext
+                .Recipes
+                .Where(r => r.Name.ToLower().Contains(searchTerm.ToLower()))
+                .ProjectTo<RecipeViewModel>()
+                .ToList();
+
+            return recipes;
         }
 
         private void AddIngredient(IngredientEditModel ingr,
@@ -454,24 +403,6 @@
             }
 
             return fileName;
-        }
-
-        public List<RecipeViewModel> Search(string searchTerm)
-        {
-            var recipes = this.dbContext
-                .Recipes
-                .Where(r => r.Name.ToLower().Contains(searchTerm.ToLower()))
-                .Select(r => new RecipeViewModel
-                {
-                    Name = r.Name,
-                    Description = r.Description,
-                    Id = r.Id,
-                    Author = r.Author.UserName,
-                    ImageUrl = r.ImageUrl,
-                    AddedOn = $"{r.AddedOn.Day}/{r.AddedOn.Month}/{r.AddedOn.Year}",
-                }).ToList();
-
-            return recipes;
         }
     }
 }

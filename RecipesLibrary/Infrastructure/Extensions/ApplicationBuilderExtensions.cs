@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using RecipesLibrary.Data;
 using RecipesLibrary.Infrastructure;
+using RecipesLibrary.Infrastructure.MapperProfiles;
 using RecipesLibrary.Models;
 using System;
 using System.Collections.Generic;
@@ -35,6 +37,16 @@ namespace RecipesLibrary.Extensions
                         });
                     }
 
+                    var userRole = GlobalConstants.UserRole;
+                    var userRoleExists = await rolesManager.RoleExistsAsync(userRole);
+                    if (!userRoleExists)
+                    {
+                        await rolesManager.CreateAsync(new IdentityRole
+                        {
+                            Name = userRole
+                        });
+                    }
+
                     var adminUser = await userManager.FindByNameAsync(adminName);
                     if(adminUser == null)
                     {
@@ -52,6 +64,10 @@ namespace RecipesLibrary.Extensions
                 .GetAwaiter()
                 .GetResult();
 
+                Mapper.Initialize(c =>
+                {
+                    c.AddProfile<MapperProfile>();
+                });
             }
 
             return app;

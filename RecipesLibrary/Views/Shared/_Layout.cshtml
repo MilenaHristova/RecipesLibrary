@@ -17,6 +17,17 @@
     </environment>
 </head>
 <body>
+    @{ 
+        var header = "";
+        if (User.IsInRole(GlobalConstants.AdministratorRole))
+        {
+            header = "Administrator";
+        }
+        else
+        {
+            header = "RecipesLibrary";
+        }
+    }
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -26,7 +37,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">RecipesLibrary</a>
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">@header</a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">

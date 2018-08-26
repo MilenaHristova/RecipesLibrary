@@ -10,6 +10,8 @@ using System.Threading.Tasks;
 using RecipesLibrary.Services.Contracts;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using RecipesLibrary.Infrastructure;
+using RecipesLibrary.Infrastructure.Extensions;
+using RecipesLibrary.Models;
 
 namespace RecipesLibrary.Controllers
 {
@@ -19,16 +21,19 @@ namespace RecipesLibrary.Controllers
         private readonly ICategoriesService categoriesService;
         private readonly ICoursesService coursesService;
         private readonly IMeasurementsService measurementsService;
+        private readonly UserManager<User> userManager;
 
         public RecipesController(IRecipesService recipesService,
             ICategoriesService categoriesService,
             ICoursesService coursesService,
-            IMeasurementsService measurementsService)
+            IMeasurementsService measurementsService,
+            UserManager<User> userManager)
         {
             this.recipesService = recipesService;
             this.categoriesService = categoriesService;
             this.coursesService = coursesService;
             this.measurementsService = measurementsService;
+            this.userManager = userManager;
         }
 
         [HttpGet]
@@ -52,7 +57,6 @@ namespace RecipesLibrary.Controllers
         [HttpPost]
         public IActionResult SearchByIngredients(RecipeSearchModel model)
         {
-
             var allRecipes = this.recipesService
                 .AllRecipesWithIngredients();
 
@@ -76,9 +80,9 @@ namespace RecipesLibrary.Controllers
                 .Where(o => o.Value > 0)
                 .OrderByDescending(r => r.Value);
 
-            var res = ordered.Select(o => o.Key).ToList();
+            var recipes = ordered.Select(o => o.Key).ToList();
 
-            return PartialView("SearchResult", res);
+            return PartialView("SearchResult", recipes);
         }
 
         [HttpGet]
@@ -102,13 +106,6 @@ namespace RecipesLibrary.Controllers
                 .Search(searchTerm);
 
             return View("Search", recipes);
-        }
-
-        [HttpGet]
-        public IActionResult SearchResult(List<RecipeWithIngredients> model)
-        {
-            var values = this.RouteData.Values["model"];
-            return View(values);
         }
 
         [HttpGet]
@@ -167,26 +164,60 @@ namespace RecipesLibrary.Controllers
 
             await this.recipesService.AddRecipe(model, currentUser);
 
+            this.AddAlertSuccess("Successfully added recipe");
             return this.Redirect("/Home/Index");
         }
 
         [HttpGet]
         public IActionResult Details(int id)
         {
-                var res = this.recipesService
+            var res = this.recipesService
                 .GetById(id);
 
-                return View(res);
+            if (User.Identity.IsAuthenticated)
+            {
+                var user = this.User.Identity.Name;
+                if (this.recipesService.IsSavedByUser(user, id))
+                {
+                    res.IsSavedByCurrentUser = true;
+                }
+                else
+                {
+                    res.IsSavedByCurrentUser = false;
+                }
+            }
             
+            if(res == null)
+            {
+                return NotFound();
+            }
+
+            return View(res);  
         }
 
         [HttpGet]
         [Authorize]
         public IActionResult Delete(int Id)
         {
-            this.recipesService
+            var username = this.User.Identity.Name;
+            var recipe = this.recipesService.GetById(Id);
+            if(recipe == null || recipe.Author != username)
+            {
+                return NotFound();
+            }
+
+            try
+            {
+                this.recipesService
                 .Delete(Id);
 
+                this.AddAlertInfo("Recipe is deleted.");
+            }
+            catch (Exception)
+            {
+                this.AddAlertDanger("Sorry, something went wrong.");
+            }
+           
             return Redirect("/Home/Index");
         }
 
@@ -197,6 +228,11 @@ namespace RecipesLibrary.Controllers
             var recipe = this.recipesService
                  .GetForEdit(id);
 
+            if(recipe == null || recipe.Author != this.User.Identity.Name)
+            {
+                return this.NotFound();
+            }
+
             return View(recipe);
         }
 
@@ -204,8 +240,17 @@ namespace RecipesLibrary.Controllers
         [Authorize]
         public IActionResult Edit(RecipeEditModel model)
         {
+            var recipe = this.recipesService
+                 .GetById(model.Id);
+
+            if (recipe == null || recipe.Author != this.User.Identity.Name)
+            {
+                return this.NotFound();
+            }
+
             this.recipesService.Edit(model);
 
+            this.AddAlertSuccess("The Recipe was successfully eddited.");
             return Redirect("/Recipes/Details/" + model.Id);
         }
     }

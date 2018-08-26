@@ -27,7 +27,7 @@ namespace RecipesLibrary.Areas.Admin.Controllers
         {
             this.categoriesService.Add(category);
 
-            return Redirect("/Home/Index");
+            return RedirectToAction(nameof(All));
         }
 
         [HttpGet]

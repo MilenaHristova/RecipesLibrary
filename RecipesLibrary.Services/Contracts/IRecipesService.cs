@@ -29,5 +29,7 @@ namespace RecipesLibrary.Services
         void Edit(RecipeEditModel model);
 
         List<RecipeViewModel> Search(string searchTerm);
+
+        bool IsSavedByUser(string username, int recipeId);
     }
 }

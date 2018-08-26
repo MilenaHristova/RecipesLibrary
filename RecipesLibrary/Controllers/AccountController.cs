@@ -15,6 +15,7 @@ using RecipesLibrary.Models.AccountViewModels;
 using RecipesLibrary.Services;
 using RecipesLibrary.Models.ManageViewModels;
 using RecipesLibrary.Services.Models;
+using RecipesLibrary.Infrastructure;
 
 namespace RecipesLibrary.Controllers
 {
@@ -44,25 +45,6 @@ namespace RecipesLibrary.Controllers
 
         [TempData]
         public string ErrorMessage { get; set; }
-
-        [HttpGet]
-        public async Task<IActionResult> Index()
-        {
-            var user = await userManager.GetUserAsync(User);
-            if (user == null)
-            {
-                throw new ApplicationException($"Unable to load user with ID '{userManager.GetUserId(User)}'.");
-            }
-
-            var model = new UserWithRecipesModel
-            {
-                Username = user.UserName,
-                Email = user.Email,
-                Recipes = this.recipesService.GetByUserId(user.Id)
-            };
-
-            return View(model);
-        }
 
         [HttpGet]
         [AllowAnonymous]
@@ -188,6 +170,8 @@ namespace RecipesLibrary.Controllers
                 var result = await userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    await this.userManager.AddToRoleAsync(user, GlobalConstants.UserRole);
+
                     logger.LogInformation("User created a new account with password.");
 
                     var code = await userManager.GenerateEmailConfirmationTokenAsync(user);

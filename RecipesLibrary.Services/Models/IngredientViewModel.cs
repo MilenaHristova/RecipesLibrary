@@ -4,7 +4,7 @@ using System.Text;
 
 namespace RecipesLibrary.Services.Models
 {
-    public class IngredientModel
+    public class IngredientViewModel
     {
         public int Id { get; set; }
 

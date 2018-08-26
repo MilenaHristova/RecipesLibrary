@@ -27,7 +27,7 @@ namespace RecipesLibrary.Areas.Admin.Controllers
         {
             this.coursesService.Add(course);
 
-            return Redirect("/Home/Index");
+            return RedirectToAction(nameof(All));
         }
 
         [HttpGet]

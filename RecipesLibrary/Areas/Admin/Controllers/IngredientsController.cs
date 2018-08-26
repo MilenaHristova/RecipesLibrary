@@ -25,6 +25,7 @@ namespace RecipesLibrary.Areas.Admin.Controllers
         public IActionResult All()
         {
             var ingr = this.service.All();
+
             return View(ingr);
         }
 
@@ -32,7 +33,8 @@ namespace RecipesLibrary.Areas.Admin.Controllers
         public IActionResult Delete(int id)
         {
             this.service.Delete(id);
-            return RedirectToAction("Index");
+
+            return RedirectToAction(nameof(All));
         }
 
         [HttpGet]
@@ -42,16 +44,18 @@ namespace RecipesLibrary.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add(string ingr)
+        public IActionResult Add(string ingredient)
         {
-            this.service.Add(ingr);
-            return View();
+            this.service.Add(ingredient);
+
+            return RedirectToAction(nameof(All));
         }
 
         [HttpGet]
         public IActionResult Edit(int id)
         {
             var ingr = this.service.GetById(id);
+
             return View(ingr);
         }
 
@@ -59,7 +63,8 @@ namespace RecipesLibrary.Areas.Admin.Controllers
         public IActionResult Edit(IngredientModel ingr)
         {
             this.service.Edit(ingr);
-            return RedirectToAction("All");
+
+            return RedirectToAction(nameof(All));
         }
     }
 }

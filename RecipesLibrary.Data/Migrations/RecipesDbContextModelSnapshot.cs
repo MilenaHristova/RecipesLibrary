@@ -296,6 +296,25 @@ namespace RecipesLibrary.Data.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("RecipesLibrary.Models.UserRecipe", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("RecipeId");
+
+                    b.Property<string>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RecipeId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UsersRecipes");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole")
@@ -374,6 +393,18 @@ namespace RecipesLibrary.Data.Migrations
                         .WithMany("Ingredients")
                         .HasForeignKey("RecipeId")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("RecipesLibrary.Models.UserRecipe", b =>
+                {
+                    b.HasOne("RecipesLibrary.Models.Recipe", "Recipe")
+                        .WithMany("Users")
+                        .HasForeignKey("RecipeId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("RecipesLibrary.Models.User", "User")
+                        .WithMany("SavedRecipes")
+                        .HasForeignKey("UserId");
                 });
 #pragma warning restore 612, 618
         }

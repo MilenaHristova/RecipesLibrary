@@ -30,7 +30,9 @@ namespace RecipesLibrary.Services.Models
 
         public int CookingTime { get; set; }
 
-        public List<IngredientModel> Ingredients { get; set; }
+        public bool IsSavedByCurrentUser { get; set; }
+
+        public List<IngredientViewModel> Ingredients { get; set; }
     }
 }
 

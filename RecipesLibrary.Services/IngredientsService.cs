@@ -55,6 +55,11 @@ namespace RecipesLibrary.Services.Admin
                 .Ingredients
                 .Find(id);
 
+            if(ingr == null)
+            {
+                return null;
+            }
+
             var result = new IngredientModel
             {
                 Name = ingr.Name,

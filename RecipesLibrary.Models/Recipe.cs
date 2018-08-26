@@ -8,6 +8,7 @@ namespace RecipesLibrary.Models
         public Recipe()
         {
             this.Ingredients = new List<RecipeIngredient>();
+            this.Users = new List<UserRecipe>();
         }
 
         public int Id { get; set; }
@@ -38,5 +39,7 @@ namespace RecipesLibrary.Models
         public string ImageUrl { get; set; }
 
         public ICollection<RecipeIngredient> Ingredients { get; set; }
+
+        public ICollection<UserRecipe> Users { get; set; }
     }
 }

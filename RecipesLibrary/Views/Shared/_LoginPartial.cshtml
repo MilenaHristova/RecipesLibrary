@@ -11,14 +11,17 @@
             @if (!User.IsInRole(GlobalConstants.AdministratorRole))
             {
                 <li>
-                    <a asp-area="" asp-controller="Account" asp-action="Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
+                    <a class="nav-link dropdown-toggle" href="/Users/Profile" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        @UserManager.GetUserName(User)
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a asp-area="" asp-controller="Users" asp-action="Profile" class="dropdown-item">Profile</a></li>
+                        <li><a asp-area="" asp-controller="Users" asp-action="Recipes" class="dropdown-item">My Recipes</a></li>
+                        <li><a asp-area="" asp-controller="Users" asp-action="Saved" class="dropdown-item">Saved Recipes</a></li>
+                        <li><a asp-area="" asp-controller="Account" asp-action="Index" class="dropdown-item">Manage Profile</a></li>
+                    </ul>
                 </li>
             }
-            else
-            {
-                <li>Admin</li>
-            }
-
             <li>
                 <button type="submit" class="btn btn-link navbar-btn navbar-link">Log out</button>
             </li>

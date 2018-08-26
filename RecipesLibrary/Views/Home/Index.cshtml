@@ -4,6 +4,9 @@
     ViewData["Title"] = "Home Page";
 }
 <main>
+    <div class="alert">
+        <alerts></alerts>
+    </div>
     <div>
         <div class="row">
             <div class="col-md-10">
@@ -12,11 +15,6 @@
                 </h1>
         
                 @Html.DisplayForModel()
-
-                <div class="text-center">
-                    <a href="/Recipes/All" class="btn btn-warning btn-lg">View More</a>
-                </div>
-
             </div>
             <div class="col-md-2">
                 <div>
@@ -42,6 +40,9 @@
                     <a href="/Recipes/Search" class="btn btn-lg btn-warning">Browse Recipes</a>
                 </div>
             </div>
+        </div>
+        <div class="text-center row">
+            <a href="/Recipes/All" class="btn btn-warning btn-lg">View More</a>
         </div>
     </div>
 </main>

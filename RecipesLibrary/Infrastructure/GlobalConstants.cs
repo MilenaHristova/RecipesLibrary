@@ -8,5 +8,7 @@ namespace RecipesLibrary.Infrastructure
     public class GlobalConstants
     {
         public const string AdministratorRole = "Administrator";
+
+        public const string UserRole = "User";
     }
 }

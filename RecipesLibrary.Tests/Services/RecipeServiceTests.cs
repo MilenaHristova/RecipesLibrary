@@ -348,26 +348,6 @@ namespace RecipesLibrary.Tests
         }
 
         [Fact]
-        public void DeleteShouldDeleteRecipe()
-        {
-            var db = this.GetDatabase();
-
-            var recipesService = new RecipesService(db);
-
-            db.Recipes
-                .Add(new Recipe
-                {
-                    Name = "test",
-                    Id = 1
-                });
-
-            recipesService.Delete(1);
-
-            var recipe = db.Recipes.Find(1);
-            recipe.Should().BeNull();
-        }
-
-        [Fact]
         public async Task AddRecipeShouldAddIngredientsToRecipe()
         {
             var db = this.GetDatabase();

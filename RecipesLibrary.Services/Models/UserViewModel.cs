@@ -4,12 +4,12 @@ using System.Text;
 
 namespace RecipesLibrary.Services.Models
 {
-    public class UserWithRecipesModel
+    public class UserViewModel
     {
         public string Username { get; set; }
 
         public string Email { get; set; }
 
-        public List<RecipeViewModel> Recipes { get; set; }
+        public string Id { get; set; }
     }
 }

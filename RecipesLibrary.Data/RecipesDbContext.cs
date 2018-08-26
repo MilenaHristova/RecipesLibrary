@@ -21,6 +21,7 @@ namespace RecipesLibrary.Data
         public DbSet<Ingredient> Ingredients { get; set; }
         public DbSet<Measurement> Measurements { get; set; }
         public DbSet<RecipeIngredient> RecipesIngredients { get; set; }
+        public DbSet<UserRecipe> UsersRecipes { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -53,6 +54,19 @@ namespace RecipesLibrary.Data
                 .HasOne(r => r.Author)
                 .WithMany(a => a.Recipes)
                 .HasForeignKey(r => r.AuthorId);
+
+            builder.Entity<UserRecipe>()
+                .HasOne(u => u.User)
+                .WithMany(u => u.SavedRecipes)
+                .HasForeignKey(u => u.UserId);
+
+            builder.Entity<UserRecipe>()
+                .HasOne(u => u.Recipe)
+                .WithMany(u => u.Users)
+                .HasForeignKey(u => u.RecipeId);
+
+            builder.Entity<UserRecipe>()
+                .HasKey(u => u.Id);
 
             base.OnModelCreating(builder);
         }

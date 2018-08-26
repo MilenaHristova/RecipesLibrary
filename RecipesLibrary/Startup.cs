@@ -11,6 +11,8 @@ using RecipesLibrary.Services.Contracts;
 using RecipesLibrary.Services.Admin;
 using RecipesLibrary.Extensions;
 using Microsoft.AspNetCore.Mvc;
+using AutoMapper;
+using RecipesLibrary.Infrastructure.MapperProfiles;
 
 namespace RecipesLibrary
 {
@@ -23,7 +25,6 @@ namespace RecipesLibrary
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<RecipesDbContext>(options =>
@@ -47,12 +48,17 @@ namespace RecipesLibrary
             services.AddTransient<ICategoriesService, CategoriesService>();
             services.AddTransient<ICoursesService, CoursesService>();
             services.AddTransient<IMeasurementsService, MeasurementsService>();
+            services.AddTransient<IUsersService, UsersService>();
 
             services.AddAuthentication().AddFacebook(options =>
             {
                 options.AppId = Configuration["Authentication:Facebook:AppId"];
                 options.AppSecret = Configuration["Authentication:Facebook:AppSecret"];
             });
+
+            services.AddSession();
+
+            services.AddAutoMapper();
 
             services.AddMvc(options =>
             {

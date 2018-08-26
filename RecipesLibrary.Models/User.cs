@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Identity;
 
 namespace RecipesLibrary.Models
@@ -11,8 +8,11 @@ namespace RecipesLibrary.Models
         public User()
         {
             this.Recipes = new List<Recipe>();
+            this.SavedRecipes = new List<UserRecipe>();
         }
 
         public ICollection<Recipe> Recipes { get; set; }
+
+        public ICollection<UserRecipe> SavedRecipes { get; set; }
     }
 }
